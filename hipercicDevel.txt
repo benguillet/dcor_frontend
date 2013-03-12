@@ -1,0 +1,111 @@
+#################################################################
+### St. Olaf College, Computer Science Department ###############
+### HiPerCiC Project ############################################
+### 1 August 2011 ###############################################
+#################################################################
+
+Hipercic Development and Release Procedure
+Always use this procedure as you develop HiPerCiC!
+
+#################################################################
+ABOUT THE HIPERCIC STRUCTURE
+
+The HiPerCiC framework is stored using SubVersion in a
+repository accessible on the CS SVN site:
+	https://svn.cs.stolaf.edu/hipercic/framework
+
+Only use this repository for HiPerCiC framework, not for
+development of HiPerCiC Apps.  Each app must be given its
+own svn repository, which should be made inside svn/hipercic/,
+but not inside svn/hipercic/framework.
+
+The svn/hipercic/hipercic respository contains two directories:
+	"Trunk" holds the current development revision.  Check
+	out this version when you want to develop the framework
+	on your own local machine.
+	https://svn.cs.stolaf.edu/hipercic/framework/trunk/
+	
+	"Releases" contains static directories which represent
+	individual releases of HiPerCiC.  When the HiPerCiC
+	developers release a numbered version, the files are here.
+	DO NOT MODIFY FOLDERS in this section of the repository.
+	https://svn.cs.stolaf.edu/hipercic/framework/releases
+
+
+HiPerCiC Apps each are given their own svn repository for
+development.  App developers should use these repositories to
+manage versioning on their own apps.  It is reccommended that app
+developers use the same trunk/release system to keep their
+repositories organized, but it is not enforced.  App repositories
+can be accessed from the url:
+	https://svn.cs.stolaf.edu/hipercic/APP_NAME
+
+
+#################################################################
+HOW TO DEVELOP THE HIPERCIC FRAMEWORK:
+
+1. Check out the trunk version from:
+	https://svn.cs.stolaf.edu/hipercic/framework/trunk
+
+2. Make developement changes, checking your work using the local
+	Django webserver and the SQLite database included in the
+	trunk development folder and configured in settings.py
+
+3. Be sure to use svn up and svn ci *with commit messages* as 
+	often as is appropriate during the development process.
+	Don't check in your working copy if it is broken!
+
+4. When all code is working and you are completely ready to update
+	the Hipercic system, check in your working copy and then
+	make a new release branch of HiPerCiC:
+ 	    svn copy -m "Creating release branch X.Y" \
+ 	    https://svn.cs.stolaf.edu/hipercic/framework/trunk \
+	    https://svn.cs.stolaf.edu/hipercic/framework/releases/X.Y
+
+5. Use svn switch to change your working copy to the new release
+	version you just created.  When you are finished making final
+	release tweaks (such as updating the version number and changing
+	to the hipercic_devel PostgreSQL database), check in the
+	working copy and svn switch back to the trunk repository.
+	Example svn switch statement:
+	    svn switch https://svn.cs.stolaf.edu/hipercic/framwork/releases/X.Y
+
+6. The next step involves updating the currently running webserver.
+	Log into helios as user hipercic and change to the 
+	hipercic_devel server.  Stop the server and use svn switch to
+	change the hipercic_devel directory to the release version you
+	just created.  Make sure to update the database settings to
+	the hipercic_devel database and to change the ACTIVE_APPS
+	flag in appConfig.py to reflect the proper configuration for
+	the hipercic_devel server.
+
+7. Start up the hipercic_devel server and test the heck out of the
+	new HiPerCiC site.  Make sure all the active apps work and	that there are no database issues.  If you have made changes
+	which affect the functioning of apps, such as changing AppHelpers,
+	be sure to notify app developers and update the hipercic_devel
+	server to hold the latest release of their apps.  Follow the
+	app development cycle to make sure all apps are updated.
+
+8. Release a new hipercic_local tarball to allow users to develop for
+	the new hipercic version.  Do this by checking out the release
+	version to a local folder using "svn export".  This command
+	does not download any SubVersion metadata.  When you have a
+	local folder with all the appropriate files, enforce these
+	conventions which will aid release:
+	    A. Name the top-level folder "hipercic_local".
+	    B. Link the hipercore database to an sqlite3 database
+		called hipercic_local.db inside the hipercic_local
+		folder.  This will make sure that local development
+		doesn't try to access the HiPerCiC PostgreSQL database.
+	    C. Run manage syncdb to set up the hipercore database and
+		load in the "fixtures" - default content for this database.
+	    D. Make sure that the apps folder only contains the newapp
+		subfolder.  This makes it easy for new developers.
+
+	Release the tarball by making a .tar.gz archive and uploading
+	it into the production documentation site.
+
+9. Once significant testing has confirmed that your new HiPerCiC
+	version functions perfectly with ALL existing apps, you can
+	update the production server to the new version.  Follow the
+	same steps as for the hipercic_devel server.

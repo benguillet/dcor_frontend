@@ -1,0 +1,7 @@
+*.log
+*.pot
+*.pyc
+.DS_Store
+dbConfig.*
+ADMIN.txt
+local_settings.py

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block extrahead %}
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+{% endblock %}
+{% block center-col %}
+	{% if form.errors %}
+		<p>This field contains errors:</p>
+		{% for error in form.errors %}
+			{{ error }}
+		{% endfor %}
+	{% endif %}
+	<form action="submit" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Submit" />
+	</form>
+	{% endblock %}
+{% block custom_scripts %}
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			"use strict";
+			
+			$('#id_start_date').datepicker();
+			$('#id_end_date').datepicker();
+			
+			var idPerAsset1 = $('#id_per_asset1');
+			var idPerAsset2 = $('#id_per_asset2');
+			idPerAsset1.keyup(function () {
+				var per1 = $(this).val();
+				idPerAsset2.val(100 - per1);
+			});
+			
+			idPerAsset2.keyup(function () {
+				var per2 = $(this).val();
+				idPerAsset1.val(100 - per2);
+			});
+		
+		});
+	</script>
+{% endblock %}

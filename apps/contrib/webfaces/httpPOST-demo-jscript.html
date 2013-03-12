@@ -1,0 +1,112 @@
+<html>
+<head>
+	<!-- A script to handle an Asynchronous JavaScript connection -->
+	<script type="text/javascript">		
+	// create an HttpObject -- different for different browsers //
+	function makeHttpObject() {
+	  try {return new XMLHttpRequest();}
+	  catch (error) {}
+	  try {return new ActiveXObject("Msxml2.XMLHTTP");}
+	  catch (error) {}
+	  try {return new ActiveXObject("Microsoft.XMLHTTP");}
+	  catch (error) {}
+  	  throw new Error("Could not create HTTP request object.");
+	}
+
+	// this object represents our request to the server //
+	// it must be global because we'll be waiting for it in a callback function //
+	var request;
+
+	// set up the request object //
+	function initRequest() {
+
+		// create the request object
+		request = makeHttpObject();
+
+		// set up callback function for the request object
+	        request.onreadystatechange=function() {
+			if(request.readyState == 4) {  // filter for only brand-new state changes
+
+				// do something with the returned data
+				//
+
+				alert("Got a response from the server.  HTTP code is " + request.status + "\nReturned text is: " + request.responseText); // display the returned text
+			}
+		}
+	}
+
+
+	function submit_post_request()
+	{
+	    initRequest();
+	    name = prompt("Please enter your name", "Chris");
+
+ 	    // send the request to the server... in this case we're handling with the same URL and backend python thing.
+	    request.open("POST", "./httpPOST-demo", true); // the name of this page
+	    request.setRequestHeader("X-CSRFToken","{{csrfTokenValue}}");
+
+	    request.send("{% csrf_token %} " + name);
+
+
+	}
+    </script>
+</head>
+
+<body>
+This page demonstrates two methods by which you can send and recieve data from the server via POST.
+<br>
+<form action="./httpPOST-demo" method="post">{% csrf_token %}
+Data to POST to server:<br><input type="text" name="personName"/><br>
+<input type="submit" value="Submit Form"/>
+</form>
+Note: The form method requires that the server send back a well-formed text document
+<br>    and the browser will then display by literally interpreting.
+<br>
+<br>Use Javascript asynchronously to interact with the server on a callback basis instead.
+<br>Click the button below to submit through Javascript.
+<br>
+<input type="button" onclick="submit_post_request()" value="Submit POST using javascript!"/>
+<br>
+
+
+</body>
+</html>
+
+<!-- Here's the Django python code for the interface with this webpage.
+
+### A template for interacting with javascript on a webpage.  Processes POST and GET commands, sending proper data for each.
+### The CSRF protection prevents Cross-Site Request Forgery attacks.  The csrfToken must be passed to the website to allow
+###      scripts to authenticate when they send another post.
+def httpPOST_demo_view_function(request):
+	
+	# For a regular page request, render out the page as normal
+	if request.method == 'GET':
+
+		# set up pageContext with important csrf data
+		# in the template, use the following models to provide csrf tokens to returning HttpRequests
+		# For forms:  <form ...> {% csrf_token %} </form>
+		# For javascript: request.setRequestHeader("X-CSRFToken","{{csrfTokenValue}}");  // use right before request.send();
+		pageContext = {}
+		pageContext.update(csrf(request))  # add cross-site request forgery protection
+		pageContext.update({'csrfTokenValue':csrf(request)['csrf_token']})  # add the token a second way
+
+		
+		
+		# insert page-rendering code here
+		
+		# insert additional context information into pageContext
+
+		# display the page -- insert your own template here
+		return render_to_response('httpPOST-demo-jscript.html',pageContext)  
+
+
+	# For POST requests, handle and respond to them
+       	elif request.method == 'POST':
+		print("Http POST request from " + str(request.META['REMOTE_ADDR']) + "\n")  # print out a notification message, for fun
+		
+		# process the POST request
+		
+		return HttpResponse('This is a response from the server.',content_type='text/plain') # returns a 200 response with no extra page info.  Can also return new data.
+
+
+-->

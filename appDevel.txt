@@ -1,0 +1,13 @@
+# TODO: Write this file!
+
+Holds how-to procedure for Hipercic Admins on their duties regarding the creation and updating of new apps.
+
+brief notes follow...
+1.  Encourage people to start apps.
+2.  Set up SVN repositories for new apps.
+3.  Keep track of development status of apps.
+4.  Release new hipercic_local packages when required, and to keep up with Django releases.
+5.  The developement cycle for apps/
+6.  How to install and test apps on devel server (each needs devel database, etc)
+7.  How to release apps -- make stable tarball, production database, and put stable version on hipercic_devel, too.
+

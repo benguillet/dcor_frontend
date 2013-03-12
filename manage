@@ -1,0 +1,61 @@
+#!/bin/bash
+
+## Wrapper script for manage.py application
+##    This eliminates "python manage.py" every time you want to run it.
+##    Also good for making utilities for the project.
+##      Launch normally or with args to run "manage"
+##      Launch with arg1="run" to launch server on port arg2, or 8100 (default)
+##      Launch with arg1="clean" to remove ~ files from home dir
+##      Launch with arg1="abs" to search for all flags of INSERT_ABsOLUTE_PATH.
+
+
+# to run the website server with a quick shortcut
+if [ "$1" = 'run' ]
+then
+    if [ $# -ge 2 ] # if there are more args
+    then
+	echo $2
+	if [ $2 -eq $2 ] # check if arg2 is a number
+	then
+	    echo 'manage: Starting server on port '$2
+	    python manage.py runserver 0.0.0.0:$2
+            # using 0.0.0.0 to listen on all network units
+	    exit 0
+	fi
+    fi
+    
+    # default case
+    echo 'manage: Starting server on port 8100'
+    python manage.py runserver 0.0.0.0:8100
+    # using 0.0.0.0 to listen on all network units
+    exit 0
+fi
+
+# shell scripted utility to remove ~ files
+if [ "$1" == 'clean' ]
+then
+    echo 'manage: cleaning project root directory'
+    rm -f *~
+    echo 'manage: cleaning subdirectories hipercore, apps, templates'
+    cd hipercore; rm -f *~ ; cd ..
+    cd apps; rm -f *~ ; cd ..
+    cd templates; rm -f *~ ; cd ..
+
+    exit 0
+fi
+
+
+# check to see if there's anything that needs to be updated to a local absolute path
+if [ "$1" == "abs" ]
+then
+	echo "Searching for absolute path requirements"
+	grep -r --exclude-dir output INSERT_ABSOLUTE_PATH *
+	exit 0
+fi
+
+
+
+# default case... launch manage.py and pass all arguments
+# echo 'manage: running manage.py with '$#' args.'
+
+python manage.py $*

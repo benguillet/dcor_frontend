@@ -1,0 +1,44 @@
+Welcome to HiPerCiC.
+In this file you will find the instructions for configuring this instance of HiPerCiC for development.
+   1. Obtain this code... which you have evidently completed.
+   2. Set up file structure for the new app
+         1. NOTE: replace appName with the actual name of you app in the following commands
+         2. cd hipercic/apps
+         3. cp -r newapp/newAppSoucre/ appName
+         4. cd appName
+         5. replace INSERT_APP_NAME appName -- *
+         6. READ: There is a lot of information about the expected structure of an app in the file NEW_APP_README in your new app. It describes what belongs in each file.
+         7. Set debug=True in the hipercic/settings.py
+   3. Set up development database for admin side...
+         1. Need to change the settings.py to have a default user set up automatically... different from the actual default admin user...
+         2. In settings.py, under the default database settings...
+               1. comment out the user, password, and host
+               2. change the name to ‘hipercore/hipercic.db’,
+               3. change the engine to ‘django.db.backends.sqlite3’
+         3. run python manage.py syncdb
+               1. answer yes to create a default user and enter any information that you would like
+   4. fix the INSERT_ABSOLUTE_PATH
+               1. Since django give the option that the static file may be served by their own server, you need to link the static files in settings.py for each instance of the hipercore...
+               2. So, run manage abs
+                     1. this returns all locations of the phrase
+               3. then insert the absolute path of the file hipercore/static
+   5. Start the development server and check the status of your copy
+               1. If an error about 500.html not being found...
+                     1. run: cp hipercic/hipercore/admin/templates/admin/500.html hipercic/hipercore/templates/500.html
+         1. start the development server using python manage.py runserver 0.0.0.0:PORT
+               1. where PORT is any 4 digit number of an open port...
+         2. open a browser...
+               1. if the browser is running on the same computer as the server
+                     1. goto 0.0.0.0:PORT
+               2. if the browser is running on your computer... (for use with a cluster head node)
+                     1. goto nameOfComputer:PORT
+         3. login using the user name and password created with the database.
+         4. navagate to url:PORT/admin to access the admin site
+   6. Activate your app
+         1. in hipercic/app/appConfig.py add ‘appName’, to ACTIVE_APPS
+               1. NOTE: there needs to be a comma after the quoted appName string
+         2. in a web browser visit url:PORT/appName/sample
+               1. This is a sample page for your app...
+   7. Check into your svn repository.
+         1. The structure of your svn repository is entirely up to you, but we do have some suggestions. See the the development server...
+         2. NOTE: Don’t check in the framework into your repository. This is already subversion-ed... only check in your app.
