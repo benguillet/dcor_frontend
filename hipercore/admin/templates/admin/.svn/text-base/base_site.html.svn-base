@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+
+{# Set up the static file prefix as a variable instead of a template tag #}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Hipercic | DCOR' %} | {{ title }}{% endblock %}
+
+
+
+
+{% block navbar %}
+{% if app_list %}
+    {% for app in app_list %}
+        {% if app.text == current_app_model %}
+            <b><a href="{{ app.url }}">{{ app.text }}</a></b> | 
+        {% else %}
+			<a href="{{ app.url }}">{{ app.text }}</a> |
+	    {% endif %} 
+    {% endfor %}   <br/>
+	{% for nav in app_nav_list %}
+            <a href="{{nav.url }}">{{ nav.text }}</a> | 
+	{% endfor %}
+
+<!-- add the bug report button -->
+<span style="float:right; ">
+<input type="button" id="bugReportButton" value="SUBMIT BUG REPORT" onclick="bugReport( {{ HIPERCIC_VERSION }} )"/>
+</span>
+<!-- end bug report button -->
+
+{% else %}
+    {# if message #}
+        <p>{# trans message #}</p>
+    {# else #}
+        <p>{# trans "No links available or you have permissions to nothing. Ha! (base_site.html error)" #}</p>
+    {# endif #}
+{% endif %}
+{% endblock %}
+{% block branding %}
+<h1 id="site-name">{% trans 'HiPerCiC administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block third_party_scripts  %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="/static/js/hipercicUtilities.js"></script> -->
+<!-- Include the bug report submission link button - redirect us to the bug submission page -->
+<script type="text/javascript" src="/static/js/bugReport.js" > </script>
+{% endblock %}
+
+

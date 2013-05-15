@@ -1,0 +1,21 @@
+#!/usr/bin/python
+# HiPerCic Project / St. Olaf College / Computer Science Dept.
+##################################################################################################
+# docGen/main.py
+# Created 7/19/2011
+# Master wrapper script for the docGen package.  Running this script passes all arguments to main.  In effect, this file is the executable.
+##################################################################################################
+__author__ = "Chris Cornelius"
+__version__ = "0.1.0"
+__status__ = "Development"
+
+import sys
+import main
+
+# make sure we only run the program if this file has been run as an executable
+if __name__ == "__main__":
+	main.main(sys.argv)
+
+else:
+	pass
+

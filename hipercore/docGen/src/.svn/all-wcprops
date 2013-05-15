@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src/__init__.py
+END
+importer.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src/importer.py
+END
+doc.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src/doc.py
+END
+out.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src/out.py
+END
+core.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/hipercic/dcor/!svn/ver/1/hipercore/docGen/src/core.py
+END

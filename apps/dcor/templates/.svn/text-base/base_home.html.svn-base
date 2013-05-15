@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block center-col %}
+<head>
+<!--link REL="Stylesheet" HREF="menu.css"-->
+<script language="javascript" src="menu.js"></script>
+<!--  <script>
+    function expand(s)
+{
+    var td = s;
+    var d = td.getElementsByTagName("div").item(0);
+    td.className = "menuHover";
+    d.className = "menuHover";
+}
+    function collapse(s)
+{
+    var td = s;
+    var d = td.getElementsByTagName("div").item(0);
+    td.className = "menuNormal";
+    d.className = "menuNormal";
+}
+  </script>-->
+<table class="navbar" width="800">
+  <tr>
+    <td class="menuNormal" width="160">
+      <!--onmouseover="expand(this);"
+      onmouseout="collapse(this);"-->
+      <a href="/dcor">Home</a>
+      <!--div class="menuNormal" width="155">
+	<table class="menu" width="155">
+	  <tr>
+	    <td class="menuNormal">
+	      <a href="jobs/submit" class="menuitem">Submit a job</a>
+	    </td>
+	  </tr>
+	</table>
+      </div-->
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="jobs/submit">Submit a Job</a>
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="jobs/pending">Pending Jobs</a>
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="/dcor/about">About</a>
+    </td>
+  </tr>
+</table>
+</head>
+<body>
+<p>
+Welcome to the Downside Correlation Hipercic project!
+</p>
+</body>
+{% endblock %}
+
+

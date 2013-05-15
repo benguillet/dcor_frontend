@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin
+END
+delete_selected_confirmation.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/delete_selected_confirmation.html
+END
+index.html.old
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/index.html.old
+END
+filter.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/filter.html
+END
+prepopulated_fields_js.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/prepopulated_fields_js.html
+END
+object_history.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/object_history.html
+END
+search_form.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/search_form.html
+END
+pagination.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/pagination.html
+END
+base_site.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/base_site.html
+END
+actions.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/actions.html
+END
+change_list_results.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/change_list_results.html
+END
+500.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/500.html
+END
+invalid_setup.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/invalid_setup.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/index.html
+END
+app_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/app_index.html
+END
+404.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/404.html
+END
+change_form.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/change_form.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/login.html
+END
+delete_confirmation.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/delete_confirmation.html
+END
+base.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/base.html
+END
+submit_line.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/submit_line.html
+END
+date_hierarchy.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/date_hierarchy.html
+END
+base.html.original
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/base.html.original
+END
+change_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/change_list.html
+END

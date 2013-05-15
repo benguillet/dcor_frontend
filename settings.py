@@ -123,7 +123,7 @@ TEMPLATE_DIRS = (  # places templates can be found -- not needed for Apps, becau
 ROOT_URLCONF = 'hipercic.hipercore.urls'   # The module where the base url config for this site is found.
 
 # Configuration for the static resources manager
-STATICFILES_DIRS = ( "hipercore/static", )  # Where to look for global (non-app) static files.  INSERT_ABSOLUTE_PATH
+STATICFILES_DIRS = ( "hipercore/static", "apps/dcor/static", )  # Where to look for global (non-app) static files.  INSERT_ABSOLUTE_PATH
 STATIC_URL = '/static/'  # The URL that the server will provide for the static media 
 #STATIC_ROOT = '???' -- this is where static files will be collected for release
 
@@ -147,7 +147,6 @@ INSTALLED_APPS = (
 
     # Enable the bug-reporting package
     'hipercic.hipercore.bugs',
-
 ) + hipercic_installed_apps  # append the list of installed HiPerCiC apps that we generated at the top of the document
 
 

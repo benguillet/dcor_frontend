@@ -1,0 +1,106 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrahead %}
+<script src="/static/js/hipercicUtilities.js" type="text/javascript"> </script>
+<script type="text/javascript">
+  <!-- I am an empty script!!! -->
+</script>
+
+{% endblock %}
+
+{% block content %}
+<h1>Bug Reports</h1>
+<br>
+Browse this list of bug reports to see if someone may have already reported your problem.
+
+
+
+
+{# generate admin-only content, like the list of unresolved bugs #}
+{% if user_is_admin %} 
+<br><br>
+There are <a href="deletedbugs">{{numDeletedBugs}}</a> deleted (inactive) bugs.<br>
+<br>
+These bugs are unresolved:<br>
+<table>
+  <tr>
+    <th> id </th>
+    <th> Date Updated </th>  
+    <th> Status </th>
+    <th> Summary </th>
+    <th align="center"> Resolve </th>  
+    <th> Date Submitted </th>
+    <th    title="The version of HiPerCiC for which this bug was submitted"> Version </th>
+   
+    
+    
+  </tr>
+{# generate the rows in the table #}
+{% for bug in openBugs %}
+  <tr>
+    <td title="The ID number of this bug"> {{bug.id}} </td>
+    <td> {{bug.dateModified}} </td>
+    <td align="center" title="{#  #}{% for key, val in bugStati %} {% if key == bug.status %} {{val}} {% endif %}{% endfor %}"> {{bug.status}} </td>
+    <td> <a href="bug?id={{bug.id}}"> {{bug.summary}} </a></td>
+    <td align="center"> <input type="button" value="Resolve" onclick="window.location='bug?id={{bug.id}}'" /> </td>
+    <td> {{bug.dateSubmitted}} </td>
+    <td    title="The version of HiPerCiC for which this bug was submitted"> {{bug.hipercicVersion}} </td>
+
+  </tr>
+
+{% empty %} {# if the table is empty #}
+</table><i>No bugs are unresolved.</i><br>
+{% endfor %}
+
+</table>
+{% endif %}
+{# end of admin-only content. #}
+
+
+
+
+
+
+
+<br><br>
+All bugs:<br>
+<table>
+  <tr>
+    <th> id </th>
+    <th> Date Updated </th>
+    <th> Status </th>
+    <th> Summary </th>
+    <th> Date Submitted </th>
+    <th title="The version of HiPerCiC for which this bug was submitted"> Version <th>
+
+   
+
+  </tr>
+{# generate the rows in the table #}
+{% for bug in allBugs %}
+  <tr>
+    <td	title="The ID number of this bug"> {{bug.id}} </td>
+    <td> {{bug.dateModified}} </td>
+    <td align="center" title="{#  #}{% for key, val in bugStati %} {% if key == bug.status %} {{val}} {% endif %}{% endfor %}"> {{bug.status}} </td>
+    <td> <a href="bug?id={{bug.id}}">{{bug.summary}} </a></td>
+    <td> {{bug.dateSubmitted}} </td>
+    <td title="The version of HiPerCiC for which this bug was submitted"> {{bug.hipercicVersion}} </td>
+
+ 
+  </tr>
+
+{% empty %} {# if the table is empty #}
+</table><i>There are no bugs to display</i><br>
+{% endfor %}
+
+</table>
+
+
+<br><br>
+
+</form>
+
+
+
+<br><br><br>Console Output:<input type="text" id="consoleOutputBox" value="" readonly="readonly" size="50" />
+{% endblock %} {# block content #}

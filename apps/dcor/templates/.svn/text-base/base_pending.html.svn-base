@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block extrahead %}
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+{% endblock %}
+{% block center-col %}
+<table class="navbar" wodth="800">
+  <tr>
+    <td class="menuNormal" width="160">
+      <p></p>
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="/dcor">Home</a>
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="submit">Submit another job</a>
+    </td>
+    <td class="menuNormal" width="160">
+      <a href="/dcor/about">About</a>
+    </td>
+  </tr>
+</table>
+<p>Success! Job is pending!</p>
+<p>Command SCP sent: {{ scp }}</p>
+<p>SCP return code: {{ return_code_scp }}</p>
+<p>Command CPP sent: {{ cpp }}</p>
+<p>CPP return code: {{ return_code_cpp }}</p>
+{% endblock %}

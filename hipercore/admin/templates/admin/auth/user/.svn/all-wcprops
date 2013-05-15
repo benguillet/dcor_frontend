@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/auth/user
+END
+add_form.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/auth/user/add_form.html
+END
+change_password.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templates/admin/auth/user/change_password.html
+END

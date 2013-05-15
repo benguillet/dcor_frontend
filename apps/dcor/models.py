@@ -6,17 +6,17 @@
 ###################################################################################
 from django.db import models
 
-
 ### Create your models here. ###
 ### Each model is a class, extending models.Model
 ### For help with models, check out https://docs.djangoproject.com/en/dev/topics/db/models/
 ### Once you have set up your models, be sure to run 'hipercic-local/manage syncdb --database=DB_NAME' in your hipercic top directory.  This will configure the database for you.
 ### Note that models cannot be linked to models in other databases using ForeignKey relationships.  You'll have to do that lookup manually.
+class Asset(models.Model):
+	name = models.CharField("asset name", max_length=100)
 
-## An example model
-## TODO: remove and write your own models!
-class ExampleModel(models.Model):
-
-    # some example fields -- will be stored in the database
-    exampleField1 = models.CharField(max_length=20) # makes a character field (string) with a maximum size of 20
-    exampleField2 = models.FloatField() # makes a floating point number field
+class Record(models.Model):
+	asset        = models.ForeignKey(Asset, on_delete=models.PROTECT)
+	date         = models.DateField("record date")
+	closed_price = models.DecimalField(max_digits=10, decimal_places=2)
+	updated_at   = models.DateTimeField("last update", auto_now=True)
+	created_at   = models.DateTimeField("creation date", auto_now_add=True)

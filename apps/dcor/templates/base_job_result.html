@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block extrahead %}
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+	<style type="text/css">
+		#results_text {
+			margin-right: 30px;
+			padding: 10px;
+			width: 500px;
+			float: left;
+		}
+
+		#chart_container {
+			float: left;
+		}
+	</style>
+{% endblock %}
+{% block center-col %}
+<div id="results_text">
+	With this parameters:
+	<ul>
+		<li>start date: {{ param_start_date }}</li>
+		<li>stop date: {{ param_stop_date }}</li>
+		<li>assets: {{ param_assets }}</li>
+		<li>percentages: {{ param_percentages }}</li>
+	</ul>
+
+	<p>The best return is: <strong>{{ return_value}}%</strong> if you start on <strong>{{ result_start_date }}</strong> and stop on <strong>{{ result_stop_date }}</strong> with this combination of assets: <strong>{{ result_combination}}</strong> and this percentages (respectively): <strong>{{ result_percentages }}</strong></p>
+</div>
+<div id="chart_container"></div>
+{% endblock %}
+{% block custom_scripts %}
+	<script src="/static/js/highcharts.js"></script>
+	<script src="/static/js/highcharts_exporting_module.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			"use strict";
+			$('#chart_container').highcharts({
+				chart: {
+					type: 'column'
+				},
+				exporting: {
+					enabled: true
+				},
+				title: {
+					text: 'Portfolio Distribution'
+				},
+				xAxis: {
+					categories: ['0/100', '5/95', '10/90', '15/85', '20/80', '25/75', '30/70', '35/65', '40/60', '45/55', '50/50', '55/45', '60/40', '65/35', '70/30', '75/25', '80/20', '85/15', '90/10', '95/5', '100/0']
+				},
+				yAxis: {
+					title: {
+						text: 'Portfolio Return'
+					}
+				},
+				series: [{
+					name: '{{ result_combination }}',
+					data: {{ portfolio_distribution }}
+				}]
+			});
+		});
+	</script>
+{% endblock %}

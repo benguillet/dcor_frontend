@@ -10,6 +10,11 @@ urlpatterns = patterns(
     'hipercic.apps.dcor.views', # remember to insert your app's name!
     (r'^$', 'home'),  # calls the home view!
 	(r'^jobs/$', 'job_submit'),
-	(r'^jobs/submit','job_submit'),
-	(r'^jobs/pending','job_pending'),
+	(r'^jobs/submit', 'job_submit'),
+	(r'^jobs/two_assets', 'job_two_assets'),
+	(r'^jobs/multi_assets', 'job_multi_assets'),
+	(r'^jobs/result', 'job_result'),
+    (r'^about/$', 'about'),
+    (r'^about/glossary$', 'glossary'),
+    (r'^about/etf_explanations$', 'etf_explanations'),
 )

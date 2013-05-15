@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags
+END
+log.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags/log.py
+END
+admin_list.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags/admin_list.py
+END
+adminmedia.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags/adminmedia.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags/__init__.py
+END
+admin_modify.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/hipercic/dcor/!svn/ver/1/hipercore/admin/templatetags/admin_modify.py
+END

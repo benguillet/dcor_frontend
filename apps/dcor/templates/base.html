@@ -1,5 +1,164 @@
 {% extends "admin/base_site.html" %}
-{% block content %} 
-{% block center-col %}{% endblock %}
-{% endblock %}		
+{% block content %}
+<style type="text/css">
+#header {
+background: #608894;
+border-bottom: solid 1px black;
+border-top: solid 1px black;
+}
+
+#navbar {
+	display: none;
+}
+
+#branding img {
+	height: 90px;
+	width: 160px;
+}
+
+body {
+	font-size: 14px;
+	background-color: #E0E0E0;
+}
+
+ul, li {
+	font-size: 14px;
+}
+
+th {
+	font-size: 16px;
+}
+
+#sddm {
+margin-left: 215px;
+padding: 0;
+z-index: 30;
+}
+
+
+#sddm li {
+padding: 0;
+margin-bottom: 40px;
+list-style: none;
+float: left;
+font: bold 14px arial;
+}
+
+#sddm li a {
+border-bottom: solid 1px black;
+border-left: solid 1px black;
+border-top: solid 1px #6088894;
+display: block;
+margin: 0 0 0 0;
+padding: 4px 10px;
+width: 100px;
+height: 14px;
+background: #608894;
+color: black;
+text-align: center;
+text-decoration: none;
+}
+
+#sddm li a:hover {
+background: #DB9F63;
+}
+
+#sddm #home {
+}
+
+#sddm #about {
+border-right: solid 1px black;
+}
+
+#sddm div {
+position: absolute;
+visibility: hidden;
+width: 140px;
+margin: 0;
+padding: 0;
+background: #EAEBD8;
+border: 1px solid #417690;
+z-index: 56;
+}
+
+#sddm div a {
+position: relative;
+display: block;
+margin: 0;
+padding: 5px 10px;
+width: auto;
+white-space: nowrap;
+text-align: left;
+text-decoration: none;
+background: #EAEBD8;
+color: #2875DE;
+font: 12px arial;
+}
+
+#sddm div a:hover {
+background: #49A3FF;
+color: #FFF;
+}
+</style>
+
+<script language="javascript">
+var timeout = 250;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function mopen(id){
+  mcancelclosetime();
+  if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+  ddmenuitem = document.getElementById(id);
+  ddmenuitem.style.visibility = 'visible';
+}
+
+function mclose(){
+  if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+}
+
+function mclosetime(){
+  closetimer = window.setTimeout(mclose, timeout);
+}
+
+function mcancelclosetime(){
+  if(closetimer)
+  {
+    window.clearTimeout(closetimer);
+    closetimer = null;
+  }
+}
+
+document.onclick = mclose;
+</script>
+
+<ul id="sddm">
+  <li id="home"><a href="/dcor">Home</a>
+  </li>
+  <li><a href="/dcor/jobs/submit"
+	 onmouseover="mopen('m1')"
+	 onmouseout="mclosetime()">Jobs</a>
+    <div id="m1"
+	 onmouseover="mcancelclosetime()"
+	 onmouseout="mclosetime()">
+      <a href="/dcor/jobs/submit">Submit a Job</a>
+      <a href="/dcor/jobs/result">Last Completed Job</a>
+    </div>
+  </li>
+  <li id="about"><a href="/dcor/about"
+	 onmouseover="mopen('m2')"
+	 onmouseout="mclosetime()">About</a>
+    <div id="m2"
+	 onmouseover="mcancelclosetime()"
+	 onmouseout="mclosetime()">
+      <a href="/dcor/about/">Project</a>
+      <a href="/dcor/about/glossary">Glossary</a>
+      <a href="/dcor/about/etf_explanations">ETF's</a>
+    </div>
+  </li>
+</ul>
+<div style="clear:both"></div>
+{% block center-col %}{% endblock %}	
+{% endblock %}
+
 

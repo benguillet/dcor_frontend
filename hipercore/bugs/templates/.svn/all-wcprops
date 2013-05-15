@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/hipercic/dcor/!svn/ver/1/hipercore/bugs/templates
+END
+deleteBugs.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/hipercic/dcor/!svn/ver/1/hipercore/bugs/templates/deleteBugs.html
+END
+submit.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/hipercic/dcor/!svn/ver/1/hipercore/bugs/templates/submit.html
+END
+viewBugs.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/hipercic/dcor/!svn/ver/1/hipercore/bugs/templates/viewBugs.html
+END
+bug.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/hipercic/dcor/!svn/ver/1/hipercore/bugs/templates/bug.html
+END

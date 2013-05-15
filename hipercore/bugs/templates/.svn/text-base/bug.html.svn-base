@@ -1,0 +1,122 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrahead %}
+<script src="/static/js/hipercicUtilities.js" type="text/javascript"> </script>
+<script type="text/javascript">
+
+  
+  // TODO: write scripts!!!
+  {# only render the updateBug function if user is an admin #}
+  {% if user_is_admin %}
+  function updateBug(form) {
+  
+  if(form.resolutionMessage.value == "Enter your resolution message here."){
+  alert("Please enter a resolution message before marking this as resolved.")
+  return;
+  }
+  if(form.resolutionMessage.value == ""){
+  alert("Please enter a resolution message before marking this as resolved.")
+  return;
+  }
+  if(form.newStatus.value == ""){
+  alert("Please choose a resolution status before marking this as resolved.")
+  return;
+  }
+
+
+  requestText = "id={{bug.id}}" 
+               +"&newStatus="+form.newStatus.value
+               +"&resolutionMessage="+form.resolutionMessage.value
+	       +"&active="+document.getElementById("activeFlag").checked;
+
+  // set up the object we're going to send
+  request = makeHttpObject();
+  
+  console("Updating bug report.");
+  
+  // open and sent the request
+  request.open("POST", window.location.href, false);
+  request.setRequestHeader("X-CSRFToken","{{csrfTokenValue}}");
+  request.send(requestText);  // send the request
+  
+  // once we returned...
+  if(request.status == 200) {
+      // move to the bug viewer page
+      window.location.reload()
+  }
+  else {
+      alert("Could not submit your changes at this time.  Error was:\n" + request.responseText);
+  }
+
+
+  }
+  {% endif %} {# user_is_admin #}
+
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+{% if not bug %} {# what if we weren't passed a bug object? #}
+<h1> Bug Details </h1>
+No bug details to display.
+{% else %}
+<h1>&nbsp</h1> <!-- TODO: find a way to eliminate this stupid way of having h1 already defined in the code.  Use styles? -->
+<h2>Bug Details - {{bug.summary}}</h2><a href="/bugs"> <i>Back to bug list </i></a>
+<br><br>
+Submitted by {{bug.user.username}} on {{bug.dateSubmitted}}<br>
+Hipercic Version {{bug.hipercicVersion}}<br>
+Status: {{bug.status}}
+<br>
+<hr>
+<div id="reportText" style="">
+<b>Description:</b><br>
+{{bug.reportText|linebreaksbr}}
+<br><br>
+</div>
+
+
+
+{% if bug.status == "O" %}
+This bug is marked as open. <br>
+{% else %}
+{% if bug.status == "C" %}
+<b>This bug is marked as closed:</b><br>
+{{bug.resolvedText|linebreaksbr}}<br>
+{% else %}
+<b>This bug is marked as Resolved:</b><br>
+{{bug.resolvedText|linebreaksbr}}<br>
+{% endif %} {# bug.status == "C" #}
+{% endif %} {# bug.status == "O" #}
+
+<hr>
+Last modified {{bug.dateModified}}<br>
+<br>
+{# Display admin-only stuff #}
+{% if user_is_admin %} 
+<br><b>Resolve this bug:</b><br>
+<form id="resolveForm" action="">
+<select id="newStatus">
+    <option value="" selected="selected">-- Choose a new Status --</option>
+    <option value="RF">Resolve - Fixed</option>
+    <option value="RF">Resolve - Duplicate</option>
+    <option value="RF">Resolve - Invalid</option>
+    <option value="RF">Resolve - Will Not Fix</option>
+    <option value="C">Closed</option>
+    <option value="O">Open</option>
+</select><br>
+<textarea rows="4" cols="45" id="resolutionMessage">{% if resolveMessageDefault %}{{ resolveMessageDefault }}{% else %}Enter your resolution message here.{% endif %}</textarea><br>
+<input type="button" id="submitButton" value="Update" onclick="updateBug(this.form)" />
+</form><br>
+<br>
+<br>
+<input type="checkbox" id="activeFlag" checked="checked"> Bug is active (visible) </input>
+{% endif %}
+{# end admin-only stuff #}
+
+
+<br><br><br>Console Output:<input type="text" id="consoleOutputBox" value="" readonly="readonly" size="50" />
+{% endif %} {# if not bug #}
+
+{% endblock %} {# block content #}

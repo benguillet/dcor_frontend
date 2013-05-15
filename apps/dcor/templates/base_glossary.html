@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block center-col %}
+<style type="text/css">
+
+#glossary {
+border: solid 1px black;
+margin: 25px 0 0 50px;
+}
+
+#glossary td {
+background: white;
+padding: 10px;
+border: 1px solid black;
+}
+
+#glossary span {
+font-weight: bold;
+font-size: 14px;
+}
+
+#title {
+color: black;
+}
+
+#glossary th {
+background: #DB9F63;
+border: solid 1px black;
+}
+
+</style>
+<table id="glossary">
+  <tbody>
+    <tr>
+      <th><span id="title">Glossary</span></th>
+    </tr>
+    <tr>
+      <td>
+	<span id="MarCap">Market Capitalization:</span> The total value of issued shares of a publicly traded company. Equal to the current share price multiplied by the<br>number of shares outstanding. This represents the public consensus on the value of a company's equity.
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<span id="LarCap">Large-cap (capitalization):</span> Short for 'large companies' with Market Capitalization > $10 billion.
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<span id="MidCap">Mid-cap:</span> Medium-sized companies; Capitalization between $2 and $10 billion.
+      </td>
+    </tr>
+    <tr>
+      <td id="bot">
+	<span id="SmaCap">Small-cap:</span> Small companies between $250 million and $2 billion Capitalization.
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
