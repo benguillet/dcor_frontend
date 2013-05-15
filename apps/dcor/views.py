@@ -184,11 +184,18 @@ def job_result(request):
 				context['portfolio_distribution'] = '[' + line.rstrip() + ']'
 	return render_to_response("base_job_result.html", context)
 
-def about(request):
+def about_us(request):
 	navbar = NavigationBar()
 	context = navbar.generateNavBar(request, current_app='dcor')
-	context['title'] = 'About'
-	return render_to_response("base_about.html", context)
+	context['title'] = 'About Us'
+	return render_to_response("base_about_us.html", context)
+
+
+def about_project(request):
+	navbar = NavigationBar()
+	context = navbar.generateNavBar(request, current_app='dcor')
+	context['title'] = 'About Project'
+	return render_to_response("base_about_project.html", context)
 
 def glossary(request):
 	navbar = NavigationBar()

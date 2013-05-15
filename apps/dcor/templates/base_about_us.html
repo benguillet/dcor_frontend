@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block center-col %}
+<style type="text/css">
+
+#about_us {
+border: solid 1px black;
+margin: 25px 0 0 50px;
+width: 900px;
+}
+
+#about_us td {
+background: white;
+padding: 10px;
+border: 1px solid black;
+}
+
+#about_us span {
+font-weight: bold;
+font-size: 14px;
+}
+
+#title {
+color: black;
+}
+
+#about_us th {
+background: #DB9F63;
+border: solid 1px black;
+}
+
+</style>
+<table id="about_us">
+  <tbody>
+    <tr>
+      <th><span id="title">About</span></th>
+    </tr>
+    <tr>
+      <td>This application was built by Benjamin Guillet, Ryan Johnsrud and Ian Zewiske, members of the Integrative Studies (IS) 201 course at St. Olaf College, taught by Dr. Richard Brown, Spring 2013. The idea was proposed by Professor Richard Goedde.</td>
+    </tr>
+     </tbody>
+</table>
+{% endblock %}
