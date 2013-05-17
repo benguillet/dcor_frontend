@@ -15,8 +15,6 @@ class Asset(models.Model):
 	name = models.CharField("asset name", max_length=100)
 
 class Record(models.Model):
-	asset        = models.ForeignKey(Asset, on_delete=models.PROTECT)
+	asset		 = models.ForeignKey(Asset, on_delete=models.PROTECT)
 	date         = models.DateField("record date")
 	closed_price = models.DecimalField(max_digits=10, decimal_places=2)
-	updated_at   = models.DateTimeField("last update", auto_now=True)
-	created_at   = models.DateTimeField("creation date", auto_now_add=True)

@@ -1,9 +1,0 @@
-#!/usr/bin/python
-# HiPerCic Project / St. Olaf College / Computer Science Dept.
-##################################################################################################
-# Created 7/20/2011
-# Launches the docGen app with certian arguments to generate documentation for this app.
-##################################################################################################
-from hipercic.hipercore.docGen import main
-
-main.main(["./doc", ".", "-J", "../.."])

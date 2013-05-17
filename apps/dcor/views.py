@@ -19,9 +19,14 @@ from django.forms.widgets import CheckboxSelectMultiple
 from django.db import models
 
 from datetime import datetime
+from os.path import expanduser
 from hipercic.apps.dcor import models # Don't forget to dcor!!!
 from hipercic.hipercore.admin.hipercicViewHelpers import NavigationBar
 from hipercic.hipercore.authenticore.decorators import login_required
+
+BACKEND_SERVER_LOCATION = 'guillet@helios.public.stolaf.edu'
+BACKEND_FOLDER_NAME     = 'dcor_backend'
+CURRENT_HOME_FOLDER     =  expanduser('~')
 
 ASSET_CHOICES = []
 for a in models.Asset.objects.raw('SELECT * FROM dcor_asset'):
@@ -51,7 +56,7 @@ def home(request):
 	context['title'] = 'Home'
 	context.update(csrf(request))  # add cross-site request forgery protection - useful for POST and javascript
 	context.update({'csrfTokenValue':csrf(request)['csrf_token']})  # add the token a second way
-	return render_to_response("base_home.html", context)
+	return render_to_response('base_home.html', context)
  
 
 def job_submit(request):
@@ -60,7 +65,7 @@ def job_submit(request):
 	context['title'] = 'Submit'
 	context.update(csrf(request))  # add cross-site request forgery protection - useful for POST and javascript
 	context.update({'csrfTokenValue':csrf(request)['csrf_token']})  # add the token a second way
-	return render(request, "base_job_submit.html", context)
+	return render(request, 'base_job_submit.html', context)
 
 def job_two_assets(request):
 	navbar = NavigationBar()
@@ -74,7 +79,7 @@ def job_two_assets(request):
 	if request.method == 'POST':
 		if form.is_valid():
 			# write file in ~/hipercic/apps/dcor/jobs/
-			with open('apps/dcor/jobs/job_' + datetime.today().strftime("%y%m%d_%h%m%s") + '_params.txt', 'w') as params_file:
+			with open('apps/dcor/jobs/job_' + datetime.today().strftime("%Y%m%d_%H%M%S") + '_params.txt', 'w') as params_file:
 				params_file.write(str(form.cleaned_data['start_date']) + '\n')
 				params_file.write(str(form.cleaned_data['end_date']) + '\n')
 				params_file.write(str(form.cleaned_data['asset1']) + ',')
@@ -84,17 +89,12 @@ def job_two_assets(request):
 				params_file.write(str(2)) # default value for portofolio_size
 
 			request.session['job_filename'] = params_file.name
-			scp = 'scp /home/guillet/hipercic/' + params_file.name + ' guillet@helios.public.stolaf.edu:dcor_backend/jobs/'
-			#context['scp'] = scp
+			scp = 'scp ' + CURRENT_HOME_FOLDER + '/hipercic/' + params_file.name + ' ' + BACKEND_SERVER_LOCATION + ':' + BACKEND_FOLDER_NAME + '/jobs/'
 			return_code_scp = subprocess.call(scp, shell=True)
-			#context['return_code_scp'] = return_code_scp
 		
 			head, tail = os.path.split(params_file.name)
-			#print tail
-			cpp = 'ssh guillet@helios.public.stolaf.edu "cd dcor_backend; ./dcor jobs/' + tail + '"'
-			#context['cpp'] = cpp
+			cpp = 'ssh ' + BACKEND_SERVER_LOCATION + ' "cd ' + BACKEND_FOLDER_NAME + '; ./dcor jobs/' + tail + '"'
 			return_code_cpp = subprocess.call(cpp, shell=True)
-			#context['return_code_cpp'] = return_code_cpp
 			return render(request, 'base_job_result.html', context)
 
 	return render(request, 'base_job_two_assets.html', context)
@@ -114,26 +114,18 @@ def job_multi_assets(request):
 			with open('apps/dcor/jobs/job_' + datetime.today().strftime("%Y%m%d_%H%M%S") + '_params.txt', 'w') as params_file:
 				params_file.write(str(form.cleaned_data['start_date']) + '\n')
 				params_file.write(str(form.cleaned_data['end_date']) + '\n')
-				print u','.join(form.cleaned_data['assets']) 
 				params_file.write(u','.join(form.cleaned_data['assets']) + '\n')
 				# only for consistency of file format between two and multi assets mode	
 				params_file.write('void\n')
 				params_file.write(str(form.cleaned_data['portfolio_size']))
 			
 			request.session['job_filename'] = params_file.name
-			scp = 'scp /home/guillet/hipercic/' + params_file.name + ' guillet@helios.public.stolaf.edu:dcor_backend/jobs/'
-
-			scp = 'scp /home/guillet/hipercic/' + params_file.name + ' guillet@helios.public.stolaf.edu:dcor_backend/jobs/'
-			#context['scp'] = scp
+			scp = 'scp ' + CURRENT_HOME_FOLDER + '/hipercic/' + params_file.name + ' ' + BACKEND_SERVER_LOCATION + ':' + BACKEND_FOLDER_NAME + '/jobs/'
 			return_code_scp = subprocess.call(scp, shell=True)
-			#context['return_code_scp'] = return_code_scp
 		
 			head, tail = os.path.split(params_file.name)
-			#print tail
-			cpp = 'ssh guillet@helios.public.stolaf.edu "cd dcor_backend; ./dcor jobs/' + tail + '"'
-			#context['cpp'] = cpp
+			cpp = 'ssh ' + BACKEND_SERVER_LOCATION + ' "cd ' + BACKEND_FOLDER_NAME + '; ./dcor jobs/' + tail + '"'
 			return_code_cpp = subprocess.call(cpp, shell=True)
-			#context['return_code_cpp'] = return_code_cpp
 			return render(request, 'base_job_result.html', context)	
 	
 	return render(request, 'base_job_multi_assets.html', context)
@@ -182,29 +174,29 @@ def job_result(request):
 				context['result_percentages'] = line.rstrip()
 			if line_number == 5:
 				context['portfolio_distribution'] = '[' + line.rstrip() + ']'
-	return render_to_response("base_job_result.html", context)
+	return render_to_response('base_job_result.html', context)
 
 def about_us(request):
 	navbar = NavigationBar()
 	context = navbar.generateNavBar(request, current_app='dcor')
 	context['title'] = 'About Us'
-	return render_to_response("base_about_us.html", context)
+	return render_to_response('base_about_us.html', context)
 
 
 def about_project(request):
 	navbar = NavigationBar()
 	context = navbar.generateNavBar(request, current_app='dcor')
 	context['title'] = 'About Project'
-	return render_to_response("base_about_project.html", context)
+	return render_to_response('base_about_project.html', context)
 
 def glossary(request):
 	navbar = NavigationBar()
 	context = navbar.generateNavBar(request, current_app='dcor')
 	context['title'] = 'Glossary'
-	return render_to_response("base_glossary.html", context)
+	return render_to_response('base_glossary.html', context)
 
 def etf_explanations(request):
 	navbar = NavigationBar()
 	context = navbar.generateNavBar(request, current_app='dcor')
 	context['title'] = 'ETF Explanations'
-	return render_to_response("base_etf_explanations.html", context)
+	return render_to_response('base_etf_explanations.html', context)

@@ -1,8 +1,18 @@
 HiPerCic Project / St. Olaf College / Computer Science Dept.
 
 dcor/NOTES
+Benjamin Guillet <benjamin.guillet@gmail.com>
 
-## this file holds notes specific to the dcor App.  Fill them in as you develop!
+To run:
+	python manage.py runserver 127.0.0.1:8000
 
-## TODO: write the contents of this file
+The backend is in the backend/ folder. It is recommended to make a copy of it on a cluster node (helios or mist) 
+to take advantage of the node computing power. To do so:
+	scp -r backend/ your_username@helios.public.stolaf.edu:dcor_backend
+
+Then you need to change this constants in the views.py file:
+	BACKEND_SERVER_LOCATION = 'guillet@helios.public.stolaf.edu'
+	BACKEND_FOLDER_NAME     = 'dcor_backend'
+
+
 
